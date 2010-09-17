@@ -1,7 +1,7 @@
 <?php
 	require_once($_SERVER["DOCUMENT_ROOT"]."/define.conf");
 
-	function get_batchList($backoffice) {
+	function get_batchList(&$backoffice) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			// TODO - Order by freshness?
@@ -34,7 +34,7 @@
 		}
 	}
 	
-	function get_batchInfo($backoffice, $id) {
+	function get_batchInfo(&$backoffice, $id) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			$query='SELECT 
@@ -65,7 +65,7 @@
 		}
 	}
 	
-	function get_batchProducts($backoffice, $id) {
+	function get_batchProducts(&$backoffice, $id) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			$query='SELECT

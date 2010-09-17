@@ -1,7 +1,7 @@
 <?php
 	require_once($_SERVER["DOCUMENT_ROOT"]."/define.conf");
 
-	function get_departments($backoffice) {
+	function get_departments(&$backoffice) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			$query='SELECT `dept_no`, `dept_name` FROM `is4c_op`.`departments` ORDER BY `dept_no`';

@@ -1,10 +1,10 @@
 <?php
-	function form($backoffice) {
+	function form(&$backoffice) {
 		if (isset($backoffice['product_detail'])) {
 			require_once($_SERVER["DOCUMENT_ROOT"]."/lib/table_departments.php");
-				$departments_result=get_departments(&$backoffice);
+				$departments_result=get_departments($backoffice);
 			require_once($_SERVER["DOCUMENT_ROOT"]."/lib/table_subdepts.php");
-				$subdepartments_result=get_subdepartments(&$backoffice);
+				$subdepartments_result=get_subdepartments($backoffice);
 				
 			$html='
 			<form action="./" method="post" name="edit">

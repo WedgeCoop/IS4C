@@ -26,14 +26,14 @@
 	require_once($_SERVER["DOCUMENT_ROOT"].'/src/htmlparts.php');
 	
 	require_once($_SERVER["DOCUMENT_ROOT"].'/lib/table_batchTypes.php');
-		$batchTypes_result=get_batchTypes(&$backoffice);
+		$batchTypes_result=get_batchTypes($backoffice);
 		
 	require_once('sql.php');		
 
 	if (isset($_REQUEST['a']) && $_REQUEST['a']=='editBatch') {
-		editBatch(&$backoffice);
+		editBatch($backoffice);
 	} else if (isset($_REQUEST['a']) && $_REQUEST['a']=='searchProduct') {
-		$search_batchProducts_result=search_batchProducts(&$backoffice, $_REQUEST['id'], $_REQUEST['searchProduct_upc']);
+		$search_batchProducts_result=search_batchProducts($backoffice, $_REQUEST['id'], $_REQUEST['searchProduct_upc']);
 		if ($search_batchProducts_result) {
 			if (mysql_num_rows($search_batchProducts_result)==1) {
 				$search_resultMatched=$search_batchProducts_result;
@@ -41,7 +41,7 @@
 				$search_result=$search_batchProducts_result;
 			} else {
 				// Search products table for UPC
-				$search_allProducts_result=search_allProducts(&$backoffice, $_REQUEST['searchProduct_upc']);
+				$search_allProducts_result=search_allProducts($backoffice, $_REQUEST['searchProduct_upc']);
 				if ($search_allProducts_result) {
 					if (mysql_num_rows($search_allProducts_result)==1) {
 						$search_resultMatched=$search_allProducts_result;
@@ -59,13 +59,13 @@
 			array_push($backoffice['status'], 'batchProducts_result error('.mysql_error($link).')');
 		}
 	} else if (isset($_REQUEST['a']) && $_REQUEST['a']=='addProduct') {
-		addProduct(&$backoffice);
+		addProduct($backoffice);
 	}
 	
 	require_once($_SERVER["DOCUMENT_ROOT"].'/lib/materialized_batch.php');
-		$batchInfo_result=get_batchInfo(&$backoffice, $_REQUEST['id']);
+		$batchInfo_result=get_batchInfo($backoffice, $_REQUEST['id']);
 		$batchInfo_row=mysql_fetch_assoc($batchInfo_result);
-		$batchProducts_result=get_batchProducts(&$backoffice, $_REQUEST['id']);
+		$batchProducts_result=get_batchProducts($backoffice, $_REQUEST['id']);
 	
 	$html='<!DOCTYPE HTML>
 <html>
