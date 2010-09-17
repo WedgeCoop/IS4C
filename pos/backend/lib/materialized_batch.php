@@ -11,6 +11,7 @@
 			`batchHeaders`.`start`, 
 			`batchHeaders`.`end`, 
 			`batchTypes`.`name` AS \'batchTypes name\',
+			`batchTypes`.`id` AS \'batchTypes id\',
 			`batchMerges`.`modified` AS \'batchMerges modified\' 
 			FROM `is4c_op`.`batchHeaders`
 			JOIN `is4c_op`.`batchTypes` ON `batchHeaders`.`batchType_id`=`batchTypes`.`id`
