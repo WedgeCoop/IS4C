@@ -1,5 +1,5 @@
 <?php
-	function addBatch($backoffice) {
+	function addBatch(&$backoffice) {
 		// TODO - Check name, start, end, type against expected values
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
@@ -16,7 +16,7 @@
 		}
 	}
 	
-	function editBatch($backoffice) {
+	function editBatch(&$backoffice) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			$query='UPDATE `is4c_op`.`batchHeaders` SET 
@@ -39,7 +39,7 @@
 		}
 	}
 	
-	function search_batchProducts($backoffice, $id, $upc) {
+	function search_batchProducts(&$backoffice, $id, $upc) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			$query='SELECT
@@ -65,7 +65,7 @@
 		}
 	}
 
-	function search_allProducts($backoffice, $upc) {
+	function search_allProducts(&$backoffice, $upc) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			$query='SELECT
@@ -88,7 +88,7 @@
 		}
 	}
 	
-	function addProduct($backoffice) {
+	function addProduct(&$backoffice) {
 		// TODO - Validate data
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
@@ -104,7 +104,7 @@
 		}
 	}	
 	
-	function listBatch($backoffice) {
+	function listBatch(&$backoffice) {
 		// For now, just mark a batchHeader as active=0 to delete it
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
@@ -129,6 +129,7 @@
 					`products`.`specialquantity`=`batchProducts`.`quantity`, */
 					`products`.`start_date`=`batchHeaders`.`start`,
 					`products`.`end_date`=`batchHeaders`.`end`,
+					`products`.`discounttype`=1, 
 					`products`.`modified`=NOW()
 					WHERE 1=1 
 						AND `products`.`upc`=`batchProducts`.`upc` 

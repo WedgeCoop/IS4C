@@ -1,7 +1,7 @@
 <?php
 	require_once($_SERVER["DOCUMENT_ROOT"]."/define.conf");
 
-	function get_batchTypes($backoffice) {
+	function get_batchTypes(&$backoffice) {
 		$link=mysql_connect($_SESSION["mServer"], $_SESSION["mUser"], $_SESSION["mPass"]);
 		if ($link) {
 			// TODO - Order by popularity?

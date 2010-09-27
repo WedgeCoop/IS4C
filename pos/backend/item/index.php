@@ -56,14 +56,15 @@
 		$backoffice['product_detail']['inUse']=1;
 		
 	} else if (isset($_REQUEST['a']) && $_REQUEST['a']=='search') {
-		search(&$backoffice);		
+		search($backoffice);		
 	} else if (isset($_REQUEST['a']) && $_REQUEST['a']=='update') {
-		update(&$backoffice);
+		update($backoffice);
 		// after updating, display the same product
 		$_REQUEST['t']='upc';
 		$_REQUEST['q']=$_REQUEST['edit_upc'];
-		search(&$backoffice);
+		search($backoffice);
 	} else  {
+		// No action needed?
 	}
 	
 	$html='<!DOCTYPE HTML>
@@ -99,9 +100,9 @@
 				<input type="submit" value="search"/>
 			</form>';
 	
-	$html.=form(&$backoffice);
+	$html.=form($backoffice);
 	
-	$html.=results(&$backoffice);
+	$html.=results($backoffice);
 	
 	$html.='
 			<div id="page_panel_statuses">';

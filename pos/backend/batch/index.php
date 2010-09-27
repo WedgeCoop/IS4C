@@ -27,19 +27,19 @@
 	require_once($_SERVER["DOCUMENT_ROOT"].'/src/htmlparts.php');
 	
 	require_once($_SERVER["DOCUMENT_ROOT"].'/lib/table_batchTypes.php');
-		$batchTypes_result=get_batchTypes(&$backoffice);
+		$batchTypes_result=get_batchTypes($backoffice);
 	
 	require_once('sql.php');		
 		
 	if (isset($_REQUEST['a']) && $_REQUEST['a']=='addBatch') {
-		addBatch(&$backoffice);
+		addBatch($backoffice);
 	} else if (isset($_REQUEST['a']) && $_REQUEST['a']=='listBatch') {
-		listBatch(&$backoffice);
+		listBatch($backoffice);
 	}
 
 	// This needs to happen after any addBatch, deleteBatch, or editBatch request
 	require_once($_SERVER["DOCUMENT_ROOT"].'/lib/materialized_batch.php');
-		$batchList_result=get_batchList(&$backoffice);
+		$batchList_result=get_batchList($backoffice);
 	
 	$html='<!DOCTYPE HTML>
 <html>

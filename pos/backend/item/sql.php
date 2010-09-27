@@ -1,5 +1,5 @@
 <?php
-	function search($backoffice) {
+	function search(&$backoffice) {
 		// $_REQUEST['q'] == Query string, or group value
 		// $_REQUEST['t'] == Query type
 		
@@ -80,7 +80,7 @@
 		}
 	}
 	
-	function similarproducts($backoffice) {
+	function similarproducts(&$backoffice) {
 		/*
 		 * For most products, select all products from brand using the vendor code to match.
 		 * For PLUs, use custom defined PLU ranges
@@ -108,7 +108,7 @@
 	}
 	
 	
-	function update($backoffice) {
+	function update(&$backoffice) {
 		// TODO - Update may be a misleading name for the function, since it handles new products as well.
 		// TODO - Maybe test for a database connection before determining query type
 		

@@ -1,7 +1,7 @@
 <?php
 	require_once($_SERVER["DOCUMENT_ROOT"].'/src/htmlparts.php');
 
-	function results($backoffice) {
+	function results(&$backoffice) {
 		if (isset($backoffice['multiple_results'])) {
 				$html='
 			<div id="results_similar_products_wrap">
@@ -30,7 +30,7 @@
 				</table>
 			</div>';
 		} else if (isset($backoffice['product_detail'])) {
-			similarproducts(&$backoffice);
+			similarproducts($backoffice);
 			if (count($backoffice['similar_products']>0)) {
 				$html='
 			<div id="results_similar_products_wrap">

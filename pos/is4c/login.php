@@ -37,7 +37,8 @@
     if (!function_exists("is_config_set")) {
         include("lib/conf.php");
     }
-
+/*
+ * for now, remove call to db config -jdp
     if (!is_config_set()) {
     ?>
         <script type='text/javascript'>
@@ -45,8 +46,9 @@
         </script>
     <?php
     }
-
+ 
     apply_configurations();
+ */
     initiate_session();
 ?>
 
@@ -68,7 +70,7 @@
                     I S 4 C
                 </td>
                 <td id='full_header'>
-                    I N T E G R A T E D &nbsp; S A L E S &nbsp; F O R &nbsp; C O O P S &nbsp; V 2 . 2
+                    I N T E G R A T E D &nbsp; S Y S T E M S &nbsp; F O R &nbsp; C O O P S &nbsp; V 2 . 2
                 </td>
             </tr>
             <tr>
