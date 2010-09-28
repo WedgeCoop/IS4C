@@ -71,7 +71,7 @@
             }
 
             function listen() {
-                startRequest("rs232/scale");
+                startRequest("rs232/ssddata/scale");
                 setTimeout("listen();", 70);
             }
         <?php
