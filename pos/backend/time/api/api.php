@@ -23,7 +23,7 @@ class shifts
     }
 
     public function shift_workers($shift_id)
-    { 
+    {
         return get_shift_workers($shift_id);
     }
 

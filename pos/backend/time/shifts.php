@@ -10,7 +10,7 @@ include_once "api/api.php";
 $shift = new shifts;
 $shift_number = 0;
 ?>
-<p> Shifts for <?=substr($_GET['date'], 4, 2) . '/' . substr($_GET['date'], 6, 2) . '/' . substr($_GET['date'], 0, 4)?>: </p>
+<p>Shifts for <?=substr($_GET['date'], 4, 2) . '/' . substr($_GET['date'], 6, 2) . '/' . substr($_GET['date'], 0, 4)?>: </p>
 <table border = '1'>
     <tr>
         <td>Shift #</td>
@@ -68,13 +68,10 @@ if (count($shift_loop) > 0)
 }
 ?>
     <tr>
-        <form id="add_shift">
-            <td><?=++$shift_number?></td>
-            <td><input id="start_time" type="time" placeholder="12:00 am" size="6"/> - <input id="end_time" type="time" placeholder="11:59 pm" size="6"/></td>
-            <td></td>
-            <td><input type="submit" value="+" onclick="add_shift($('#start_time').val(), $('#end_time').val(), <?=$_GET['date']?>); show_shifts(<?=$_GET['date']?>); return false;" /></td>
-        </form>
-    <tr>
+        <td><?=++$shift_number?></td>
+        <td><input id="start_time" type="time" placeholder="12:00 am" size="6"/> - <input id="end_time" type="time" placeholder="11:59 pm" size="6"/></td>
+        <td></td>
+        <td><input type="submit" value="+" onclick="add_shift($('#start_time').val(), $('#end_time').val(), <?=$_GET['date']?>); show_shifts(<?=$_GET['date']?>); return false;" /></td>
     </tr>
 </table>
 <div id='empty'></div>

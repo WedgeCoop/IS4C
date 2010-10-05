@@ -18,8 +18,8 @@
         {
             $display_date = $today;
         }
-        $firstDay = getdate(mktime(0, 0, 0, $display_date['mon'], 1, $display_date['year']));
-        $lastDay  = getdate(mktime(0, 0, 0, $display_date['mon'] + 1, 0, $display_date['year']));
+        $first_day = getdate(mktime(0, 0, 0, $display_date['mon'], 1, $display_date['year']));
+        $last_day  = getdate(mktime(0, 0, 0, $display_date['mon'] + 1, 0, $display_date['year']));
         ?>
         <table class = 'calendar'>
             <tr class = 'calendar_head'>
@@ -37,28 +37,25 @@
                 <td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr>
             <tr>
         <?php
-        for($i = 1; $i < $firstDay['wday']; $i++)
+        for($i = 1; $i <= $first_day['wday']; $i++)
         {
             echo '<td>&nbsp;</td>';
         }
         $actday = 0;
-        for($i = $firstDay['wday']; $i<=7; $i++)
+        for($i = $first_day['wday']; $i < 7; $i++)
         {
-            if ($i != 0)
+            $actday++;
+            echo '<td ';
+            if ($actday == $today['mday'] && $today['mon'] == $display_date['mon'] && $today['year'] == $display_date['year'])
             {
-                $actday++;
-                echo '<td ';
-                if ($actday == $today['mday'] && $today['mon'] == $display_date['mon'] && $today['year'] == $display_date['year'])
-                {
-                    echo "id='current_date'";
-                }
-                echo ' onclick="show_shifts(' . $display_date['year'] . str_pad($display_date['mon'], 2, '0', STR_PAD_LEFT) . str_pad($actday, 2, '0', STR_PAD_LEFT) . ');">';
-                echo $actday;
-                echo '</td>';
+                echo "id='current_date'";
             }
+            echo ' onclick="show_shifts(' . $display_date['year'] . str_pad($display_date['mon'], 2, '0', STR_PAD_LEFT) . str_pad($actday, 2, '0', STR_PAD_LEFT) . ');">';
+            echo $actday;
+            echo '</td>';
         }
         echo '</tr>';
-        $fullWeeks = floor(($lastDay['mday']-$actday)/7);
+        $fullWeeks = floor(($last_day['mday']-$actday)/7);
 
         for ($i=0; $i < $fullWeeks; $i++)
         {
@@ -77,14 +74,14 @@
             }
             echo '</tr>';
         }
-        if ($actday < $lastDay['mday'])
+        if ($actday < $last_day['mday'])
         {
             echo '<tr>';
 
             for ($i=0; $i<7; $i++)
             {
                 $actday++;
-                if ($actday <= $lastDay['mday'])
+                if ($actday <= $last_day['mday'])
                 {
                     echo '<td ';
                     if ($actday == $today['mday'] && $today['mon'] == $display_date['mon'] && $today['year'] == $display_date['year'])
@@ -110,3 +107,30 @@
 
     </body>
 </html>
+
+<?php
+function gmgetdate($timestamp = null) {
+    if (is_null($timestamp)) { $timestamp = time(); }
+
+    $dateParts = array(
+        'mday'    => 'j',
+        'wday'    => 'w',
+        'yday'    => 'z',
+        'mon'     => 'n',
+        'year'    => 'Y',
+        'hours'   => 'G',
+        'minutes' => 'i',
+        'seconds' => 's',
+        'weekday' => 'l',
+        'month'   => 'F',
+        0         => 'U'
+    );
+
+    while (list(, $value) = each($dateParts)) {
+        $value = gmdate($value, $timestamp);
+        if (is_numeric($value)) { $value = (int)$value; }
+    }
+
+    return $dateParts;
+}
+?>
