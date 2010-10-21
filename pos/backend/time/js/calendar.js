@@ -11,7 +11,7 @@ function add_shift(start_time, end_time, date)
     {
         if (start_time.substr(6, 2).toUpperCase() == 'PM' && start_time.substr(0, 2) != 12)
         {
-            start_time = (parseInt(start_time.substr(0, 2)) + 12) + start_time.substr(3, 2);
+            start_time = (parseInt(start_time.substr(0, 2), 10) + 12) + start_time.substr(3, 2);
         }
         else
         {
@@ -19,7 +19,7 @@ function add_shift(start_time, end_time, date)
         }
         if (end_time.substr(6, 2).toUpperCase() == 'PM' && end_time.substr(0, 2) != 12)
         {
-            end_time = (parseInt(end_time.substr(0, 2)) + 12) + end_time.substr(3, 2);
+            end_time = (parseInt(end_time.substr(0, 2), 10) + 12) + end_time.substr(3, 2);
         }
         else
         {
