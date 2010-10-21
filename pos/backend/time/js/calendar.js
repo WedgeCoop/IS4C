@@ -27,7 +27,7 @@ function add_shift(start_time, end_time, date)
         }
         date = date.toString();
         start = new Date(date.substring(0, 4), date.substring(4, 6) - 1, date.substring(6, 8), start_time.substr(0, 2), start_time.substr(3, 4), 0).getTime() / 1000;
-        end = new Date(date.substring(0, 4), date.substring(4, 6), date.substring(6, 8), end_time.substr(0, 2), end_time.substr(3, 4)).getTime() / 1000;
+        end = new Date(date.substring(0, 4), date.substring(4, 6) - 1, date.substring(6, 8), end_time.substr(0, 2), end_time.substr(3, 4), 0).getTime() / 1000;
         if (start >= end)
         {
             alert ("The start time must be before the end time.");
