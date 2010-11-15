@@ -37,7 +37,8 @@
     if (!function_exists("is_config_set")) {
         include("lib/conf.php");
     }
-
+/*
+ * for now, remove call to db config -jdp
     if (!is_config_set()) {
     ?>
         <script type='text/javascript'>
@@ -45,8 +46,9 @@
         </script>
     <?php
     }
-
+ 
     apply_configurations();
+ */
     initiate_session();
 ?>
 

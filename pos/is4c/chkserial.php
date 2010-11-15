@@ -29,18 +29,18 @@
     </head>
     <body bgcolor="#eeeeee">
         <?php
-            $scaleFile = "/pos/is4c/rs232/scale";
+            $scaleFile = "/pos/is4c/rs232/ssddata/scale";
             $scaleHandle = fopen($scaleFile, "r");
             $scaleData = rtrim(fread($scaleHandle, filesize($scaleFile)));
             fclose($scaleHandle);
 
-            $scanFile = "/pos/is4c/rs232/scanner";
+            $scanFile = "/pos/is4c/rs232/ssddata/scanner";
             $scanHandle = fopen($scanFile, "r");
             $scanData = rtrim(fread($scanHandle, filesize($scanFile)));
             fclose($scanHandle);
 
             if (strlen($scanData) > 9) {
-                $clearScanner = exec("echo '' > /pos/is4c/rs232/scanner", $aClearScanner);
+                $clearScanner = exec("echo '' > /pos/is4c/rs232/ssddata/scanner", $aClearScanner);
     
                 echo "<script type=\"text/javascript\">\n";
                 echo "var inputVal = window.top.input.document.form.reginput.value;";

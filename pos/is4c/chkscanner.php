@@ -20,7 +20,7 @@
                 createXMLHttpRequest();
                 xmlHttp.onreadystatechange = handleStateChange;
                 var myRandom=parseInt(Math.random()*99999999);
-                xmlHttp.open("GET", "rs232/scanner?rand=" + myRandom, true);
+                xmlHttp.open("GET", "rs232/ssddata/scanner?rand=" + myRandom, true);
                 xmlHttp.send(null);
             }
 

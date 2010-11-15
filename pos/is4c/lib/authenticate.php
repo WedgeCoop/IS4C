@@ -20,10 +20,13 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 *********************************************************************************/
-    if (!function_exists("get_config_auto")) {
+/*
+ * for now, remove call to db config -jdp
+	if (!function_exists("get_config_auto")) {
         include_once("/pos/is4c/lib/conf.php");
         apply_configurations();
     }
+ */
 
     if (!function_exists("pDataConnect")) {
         include("../connect.php");

@@ -21,10 +21,14 @@
 
 *********************************************************************************/
 
-if (!function_exists("get_config_auto")) {
-    include_once("/pos/is4c/lib/conf.php");
-    apply_configurations();
-}
+/* 
+ * for now, remove call to db config -jdp
+	if (!function_exists("get_config_auto")) {
+    	include_once("/pos/is4c/lib/conf.php");
+    	apply_configurations();
+	}
+ */
+include_once("ini/ini.php");
 if (!function_exists("pDataConnect")) include("connect.php");
 if (!function_exists("tDataConnect")) include("connect.php");
 if (!function_exists("loadglobalvalues")) include("loadconfig.php");

@@ -27,4 +27,7 @@ if ($lptty < 0) {
 	print FILE "\n/etc/init.d/lptty";
 }
 
+print FILE "\nmount -t tmpfs -o size=1m tmpfs /pos/is4c/rs232/ssddata";
+print FILE "\nchmod 777 /pos/is4c/rs232/ssddata"; 
+
 close(FILE);
