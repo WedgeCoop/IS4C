@@ -1,0 +1,9 @@
+USE `time`;
+DROP TABLE IF EXISTS `employee_shifts`;
+CREATE TABLE `employee_shifts`
+(
+    `emp_no` smallint(5) NOT NULL,
+    `shift_id` int(10) NOT NULL,
+    PRIMARY KEY (`emp_no`,`shift_id`),
+    KEY `shift_fk` (`shift_id`)
+);

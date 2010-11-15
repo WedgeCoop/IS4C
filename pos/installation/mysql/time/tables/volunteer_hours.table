@@ -1,0 +1,12 @@
+USE `time`;
+DROP TABLE IF EXISTS `volunteer_hours`;
+CREATE TABLE `volunteer_hours`
+(
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `start` datetime,
+    `end` datetime DEFAULT NULL,
+    `shift_id` int(10) NOT NULL,
+    `emp_no` int(10) NOT NULL,
+    PRIMARY KEY (`id`)
+);
+

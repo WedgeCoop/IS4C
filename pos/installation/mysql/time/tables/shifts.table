@@ -1,0 +1,10 @@
+USE `time`;
+DROP TABLE IF EXISTS `shifts`;
+CREATE TABLE `shifts`
+(
+    `shift_id` int(10) NOT NULL AUTO_INCREMENT,
+    `start` datetime NOT NULL,
+    `end` datetime NOT NULL,
+    PRIMARY KEY (`shift_id`)
+);
+
