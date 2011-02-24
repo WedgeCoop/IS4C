@@ -1,0 +1,7 @@
+<VirtualHost *:80>
+	ServerName %(servername)s
+	DocumentRoot "%(docroot)s"
+	<Directory "%(docroot)s">
+		DirectoryIndex %(index)s
+	</Directory>
+</VirtualHost>

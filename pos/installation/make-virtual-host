@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+
+
+import sys
+import socket
+import tempfile
+import os
+import re
+import shutil
+import subprocess
+
+
+class SiteAlreadyExists(Exception):
+
+    def __init__(self, name, path):
+        self.name = name
+        self.path = path
+
+    def __str__(self):
+        return "Site already exists: %s (%s)" % (self.name, self.path)
+
+
+def create_site_file(name, servername, docroot, index, force=False):
+    template_path = os.path.join(os.path.dirname(__file__), 'lib', 'virtual_host_template')
+    site_dir = '/etc/apache2/sites-available'
+    assert os.path.exists(site_dir)
+    site_path = os.path.join(site_dir, name)
+    if not force and os.path.exists(site_path):
+        raise SiteAlreadyExists(name, site_path)
+    template_file = open(template_path)
+    site_file = open(site_path, 'w')
+    site_file.write(template_file.read() % locals())
+    site_file.close()
+    template_file.close()
+
+
+def enable_site(name):
+    null = open(os.devnull, 'w')
+    subprocess.call('a2ensite %s' % name, shell=True, stdout=null)
+    subprocess.call('/etc/init.d/apache2 reload', shell=True, stdout=null)
+    null.close()
+
+
+def update_hosts_file(servername, address):
+    hosts_path = '/etc/hosts'
+    pattern = re.compile(r'^\s*%s\s*%s\s*$' %
+                         (address.replace('.', r'\.'), servername.replace('.', r'\.')))
+    fd, temp_path = tempfile.mkstemp(); os.close(fd)
+    hosts_file = open(hosts_path)
+    new_hosts_file = open(temp_path, 'w')
+    found = False
+    for line in hosts_file:
+        line = line.rstrip('\n')
+        if pattern.match(line):
+            found = True
+        print >> new_hosts_file, line
+    hosts_file.close()
+    if not found:
+        print >> new_hosts_file, "\n# Auto-added by IS4C:"
+        print >> new_hosts_file, "%s\t%s" % (address, servername)
+    new_hosts_file.close()
+    shutil.copyfile(hosts_path, hosts_path + '.is4c-backup')
+    shutil.copyfile(temp_path, hosts_path)
+    os.remove(temp_path)
+
+
+def make_virtual_host(type_, name, force=False):
+    hostname = socket.gethostname()
+    address = socket.gethostbyname(hostname)
+    docroot = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+    if type_ == 'is4c':
+        docroot = os.path.join(docroot, 'is4c')
+        index = 'pos.php'
+    elif type_ == 'fannie':
+        docroot = os.path.join(docroot, 'backend')
+        index = 'index.php'
+    else:
+        raise Exception("Unknown host type: %s" % type_)
+    servername = '%s.%s' % (name, hostname)
+    create_site_file(name, servername, docroot, index, force=force)
+    enable_site(name)
+    update_hosts_file(servername, address)
+
+
+if __name__ == '__main__':
+    from optparse import OptionParser
+    parser = OptionParser(usage="Usage: %prog [options] type [name]")
+    parser.add_option('-f', '--force', action='store_true', dest='force', default=False,
+                      help='Force site creation even if it already exists.')
+    options, args = parser.parse_args()
+    if not args:
+        parser.error('Must specify site type')
+    if args[0] not in ('is4c', 'fannie'):
+        parser.error('Site type must be one of: is4c, fannie')
+    name = args[1] if len(args) == 2 else args[0]
+    make_virtual_host(args[0], name, force=options.force)
