@@ -9,11 +9,11 @@ echo "... Done"
 
 echo "Installing device drivers"
 
-if [ /etc/init.d/ssd ]; then
+if [ -f /etc/init.d/ssd ]; then
   rm /etc/init.d/ssd
 fi
 
-if [ /etc/init.d/lptty ]; then
+if [ -f /etc/init.d/lptty ]; then
   rm /etc/init.d/lptty
 fi
 
